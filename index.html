@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Distribuidora ZAIS CYA - Catálogo</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="shortcut icon" href="/WhatsApp Image 2026-05-11 at 5.54.51 PM copy.ico" type="image/x-icon">
     <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="shortcut icon" href="/WhatsApp Image 2026-05-11 at 5.54.51 PM copy.ico" type="image/x-icon">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap');
         body { font-family: 'Plus Jakarta Sans', sans-serif; scroll-behavior: smooth; }
@@ -17,13 +17,12 @@
 </head>
 <body class="bg-[#f1f5f9] text-slate-800">
 
-    <!-- Navbar con fondo gris oscuro suave para resaltar el logo -->
+    <!-- Navbar -->
     <nav class="bg-slate-100 shadow-sm sticky top-0 z-50 border-b border-slate-200">
         <div class="max-w-7xl mx-auto px-4 h-16 flex justify-between items-center">
             <div class="flex items-center gap-3">
-                <!-- Contenedor del Logo ajustado -->
                 <div class="h-12 w-12 rounded-full overflow-hidden bg-white shadow-sm border border-slate-200">
-                    <img src="/WhatsApp Image 2026-05-11 at 5.54.51 PM.jpeg" 
+                    <img src="https://api.allorigins.win/raw?url=https://raw.githubusercontent.com/distribuidora-zais/assets/main/logo.jpg" 
                          onerror="this.src='https://ui-avatars.com/api/?name=ZAIS+CYA&background=f1f5f9&color=888'"
                          alt="Logo Distribuidora ZAIS CYA" 
                          class="w-full h-full object-cover">
@@ -45,6 +44,7 @@
     </nav>
 
     <main class="max-w-7xl mx-auto px-4 py-8">
+        <!-- Sección Tienda -->
         <section id="store-section">
             <div class="mb-8">
                 <h1 class="text-3xl font-bold mb-2 text-slate-900 tracking-tight">Nuestro Catálogo</h1>
@@ -54,6 +54,7 @@
             <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"></div>
         </section>
 
+        <!-- Sección Admin Inventario -->
         <section id="admin-panel-section" class="hidden">
             <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 gap-4">
                 <h1 class="text-2xl font-bold text-slate-900">Gestión de Inventario</h1>
@@ -85,6 +86,7 @@
             </div>
         </section>
 
+        <!-- Sección Admin Tickets -->
         <section id="admin-tickets-section" class="hidden">
             <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 gap-4">
                 <h1 class="text-2xl font-bold text-slate-900">Tickets Generados</h1>
@@ -95,6 +97,7 @@
             <div id="tickets-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
         </section>
 
+        <!-- Sección Admin Login -->
         <section id="admin-login-section" class="hidden flex items-center justify-center min-h-[40vh]">
             <div class="bg-white p-8 rounded-2xl shadow-xl border border-slate-100 w-full max-w-sm text-center">
                 <h2 class="text-xl font-bold mb-6 text-slate-900">Acceso Administrativo</h2>
@@ -109,35 +112,56 @@
         </section>
     </main>
 
-    <!-- Modales -->
+    <!-- Modal Producto -->
     <div id="product-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-[70] flex items-center justify-center p-4 hidden">
-        <div class="bg-white rounded-3xl w-full max-w-md p-8 shadow-2xl overflow-y-auto max-h-[90vh]">
-            <h2 id="modal-title" class="text-xl font-bold mb-6 text-slate-900">Gestión de Prenda</h2>
+        <div class="bg-white rounded-3xl w-full max-w-lg p-8 shadow-2xl overflow-y-auto max-h-[90vh]">
+            <h2 id="modal-title" class="text-xl font-bold mb-6 text-slate-900 border-b pb-2">Gestión de Prenda</h2>
             <form id="product-form" onsubmit="handleProductSubmit(event)" class="space-y-4">
                 <input type="hidden" id="edit-id">
                 <div>
                     <label class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Foto de la prenda</label>
-                    <input type="file" id="p-image-file" accept="image/*" class="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:ring-2 focus:ring-slate-300 text-xs">
+                    <input type="file" id="p-image-file" accept="image/*" class="w-full p-2 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:ring-2 focus:ring-slate-300 text-xs">
                     <input type="hidden" id="p-image-base64">
                 </div>
-                <div>
-                    <label class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Nombre de la prenda</label>
-                    <input type="text" id="p-name" required class="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:ring-2 focus:ring-slate-300">
-                </div>
-                <div>
-                    <label class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Categoría</label>
-                    <select id="p-cat" class="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:ring-2 focus:ring-slate-300"></select>
-                </div>
                 <div class="grid grid-cols-2 gap-4">
-                    <div>
-                        <label class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">P. Detal ($)</label>
-                        <input type="number" id="p-price" step="0.01" required class="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl outline-none">
+                    <div class="col-span-2 sm:col-span-1">
+                        <label class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Nombre de la prenda</label>
+                        <input type="text" id="p-name" required class="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:ring-2 focus:ring-slate-300">
                     </div>
-                    <div>
-                        <label class="text-[10px] font-bold text-slate-800 uppercase tracking-widest">P. Mayor (3+) ($)</label>
-                        <input type="number" id="p-wholesale" step="0.01" required class="w-full p-3 bg-slate-100 border border-slate-300 rounded-xl outline-none font-bold">
+                    <div class="col-span-2 sm:col-span-1">
+                        <label class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Categoría</label>
+                        <select id="p-cat" class="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:ring-2 focus:ring-slate-300"></select>
                     </div>
                 </div>
+
+                <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-3">
+                    <p class="text-[10px] font-bold text-slate-600 uppercase tracking-widest border-b border-slate-200 pb-1">Precios en Divisas ($)</p>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="text-[9px] font-bold text-slate-400 uppercase">Detal ($)</label>
+                            <input type="number" id="p-price" step="0.01" required class="w-full p-2 bg-white border border-slate-200 rounded-lg outline-none">
+                        </div>
+                        <div>
+                            <label class="text-[9px] font-bold text-slate-400 uppercase">Mayor ($)</label>
+                            <input type="number" id="p-wholesale" step="0.01" required class="w-full p-2 bg-white border border-slate-200 rounded-lg outline-none">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-blue-50 p-4 rounded-2xl border border-blue-100 space-y-3">
+                    <p class="text-[10px] font-bold text-blue-600 uppercase tracking-widest border-b border-blue-200 pb-1">Precios si se paga en Bolívares (Bs)</p>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="text-[9px] font-bold text-blue-400 uppercase">Detal (Bs) ($)</label>
+                            <input type="number" id="p-price-bs" step="0.01" required class="w-full p-2 bg-white border border-blue-200 rounded-lg outline-none">
+                        </div>
+                        <div>
+                            <label class="text-[9px] font-bold text-blue-400 uppercase">Mayor (Bs) ($)</label>
+                            <input type="number" id="p-wholesale-bs" step="0.01" required class="w-full p-2 bg-white border border-blue-200 rounded-lg outline-none font-bold">
+                        </div>
+                    </div>
+                </div>
+
                 <div>
                     <label class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Stock Disponible</label>
                     <input type="number" id="p-stock" required class="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl outline-none">
@@ -150,6 +174,7 @@
         </div>
     </div>
 
+    <!-- Modal Carrito -->
     <div id="cart-modal" class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-[60] flex justify-end hidden">
         <div class="bg-white w-full max-w-md h-full shadow-2xl flex flex-col">
             <div class="p-6 border-b border-slate-100 flex justify-between items-center bg-white">
@@ -180,7 +205,7 @@
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
         import { getFirestore, collection, doc, addDoc, updateDoc, deleteDoc, onSnapshot, serverTimestamp, query, orderBy } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
-       const firebaseConfig = {
+        const firebaseConfig = {
             apiKey: "AIzaSyDIp95fqGFn2mgJ_031a1Y_JfeKECKZTOk",
             authDomain: "potabilizadora-65aeb.firebaseapp.com",
             databaseURL: "https://potabilizadora-65aeb-default-rtdb.firebaseio.com",
@@ -189,7 +214,7 @@
             messagingSenderId: "503467709475",
             appId: "1:503467709475:web:dcad5aa24d0bf9d23acd96",
             measurementId: "G-E3TE034RV5"
-            };
+            };        
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
         
@@ -238,6 +263,8 @@
                 category: document.getElementById('p-cat').value,
                 price: parseFloat(document.getElementById('p-price').value),
                 wholesale: parseFloat(document.getElementById('p-wholesale').value),
+                priceBs: parseFloat(document.getElementById('p-price-bs').value || 0),
+                wholesaleBs: parseFloat(document.getElementById('p-wholesale-bs').value || 0),
                 stock: parseInt(document.getElementById('p-stock').value),
                 updatedAt: serverTimestamp()
             };
@@ -263,16 +290,38 @@
                         <span class="absolute top-2 right-2 text-[9px] font-bold px-2 py-1 bg-white/90 border border-slate-200 rounded-full ${p.stock > 0 ? 'text-slate-600' : 'text-rose-400'}">STOCK: ${p.stock}</span>
                     </div>
                     <h3 class="font-bold text-sm h-10 line-clamp-2 text-slate-800">${p.name}</h3>
-                    <div class="mt-3 space-y-1.5">
-                        <div class="flex justify-between text-xs px-1">
-                            <span class="text-slate-500 font-medium">Detal:</span>
-                            <span class="font-bold text-slate-800">$${p.price}</span>
+                    
+                    <!-- Bloque de Precios -->
+                    <div class="mt-3 space-y-2">
+                        <div class="bg-slate-50 p-2 rounded-xl border border-slate-100">
+                             <div class="flex justify-between text-[10px] mb-1">
+                                <span class="text-slate-400 font-bold uppercase">Pago Divisa ($)</span>
+                             </div>
+                             <div class="flex justify-between text-xs mb-1">
+                                <span class="text-slate-500">Detal:</span>
+                                <span class="font-bold text-slate-800">$${p.price}</span>
+                             </div>
+                             <div class="flex justify-between text-xs font-bold text-slate-900">
+                                <span>Mayor:</span>
+                                <span>$${p.wholesale || p.price}</span>
+                             </div>
                         </div>
-                        <div class="flex justify-between text-xs p-1.5 bg-slate-50 rounded-lg text-slate-700 font-bold border border-slate-100">
-                            <span>Mayor (3+):</span>
-                            <span>$${p.wholesale || p.price}</span>
+
+                        <div class="bg-blue-50/50 p-2 rounded-xl border border-blue-100">
+                             <div class="flex justify-between text-[10px] mb-1">
+                                <span class="text-blue-400 font-bold uppercase">Pago Bs ($)</span>
+                             </div>
+                             <div class="flex justify-between text-xs mb-1">
+                                <span class="text-slate-500">Detal:</span>
+                                <span class="font-bold text-blue-600">$${p.priceBs || p.price}</span>
+                             </div>
+                             <div class="flex justify-between text-xs font-bold text-blue-700">
+                                <span>Mayor:</span>
+                                <span>$${p.wholesaleBs || p.wholesale || p.price}</span>
+                             </div>
                         </div>
                     </div>
+
                     <button onclick="addToCart('${p.id}')" ${p.stock <= 0 ? 'disabled' : ''} class="mt-4 w-full bg-slate-800 text-white py-2.5 rounded-xl font-bold text-xs hover:bg-slate-900 disabled:bg-slate-200 transition-all shadow-sm">
                         ${p.stock > 0 ? 'Agregar al Carrito' : 'Agotado'}
                     </button>
@@ -288,7 +337,12 @@
                     <td class="px-6 py-4"><div class="w-10 h-10 bg-slate-100 rounded-lg overflow-hidden flex items-center justify-center">${p.image ? `<img src="${p.image}" class="w-full h-full object-cover">` : `<i data-lucide="image" class="w-4 h-4 text-slate-300"></i>`}</div></td>
                     <td class="px-6 py-4 font-bold text-slate-700">${p.name}</td>
                     <td class="px-6 py-4 text-slate-500 text-xs uppercase font-medium">${p.category}</td>
-                    <td class="px-6 py-4"><div class="flex flex-col gap-1"><span class="text-[10px] text-slate-400 font-bold">Detal: $${p.price}</span><span class="text-[10px] text-slate-900 font-black">Mayor: $${p.wholesale}</span></div></td>
+                    <td class="px-6 py-4">
+                        <div class="flex flex-col gap-1">
+                            <span class="text-[9px] text-slate-400 font-bold">DET/MAY: $${p.price}/$${p.wholesale}</span>
+                            <span class="text-[9px] text-blue-500 font-bold">BS DET/MAY: $${p.priceBs || 0}/$${p.wholesaleBs || 0}</span>
+                        </div>
+                    </td>
                     <td class="px-6 py-4 font-bold text-slate-600">${p.stock}</td>
                     <td class="px-6 py-4 text-right"><button onclick="editProduct('${p.id}')" class="text-slate-900 font-bold text-xs mr-4 hover:underline">Editar</button><button onclick="deleteProduct('${p.id}')" class="text-rose-400 font-bold text-xs hover:text-rose-600">Eliminar</button></td>
                 </tr>
@@ -305,8 +359,20 @@
                         <div><p class="text-[9px] text-slate-400 font-black uppercase">Cliente</p><h3 class="font-bold text-slate-900 text-base">${t.customerName}</h3><p class="text-xs text-slate-500">${t.customerPhone}</p></div>
                         <span class="text-[9px] bg-slate-100 px-2 py-1 rounded text-slate-400 font-bold">${t.date}</span>
                     </div>
-                    <div class="space-y-2">${t.items.map(i => `<div class="flex justify-between text-xs font-medium"><span class="text-slate-500">${i.qty}x ${i.name}</span><span class="text-slate-800 font-bold">$${(i.price * i.qty).toFixed(2)}</span></div>`).join('')}</div>
-                    <div class="flex justify-between items-center pt-4 border-t border-slate-100"><span class="text-xs font-black text-slate-400 uppercase">Total</span><span class="text-xl font-black text-slate-900">$${t.total.toFixed(2)}</span></div>
+                    <div class="space-y-3">
+                        ${t.items.map(i => `
+                            <div class="flex gap-3 items-center">
+                                <div class="w-8 h-8 rounded bg-slate-100 overflow-hidden flex-shrink-0">
+                                    ${i.image ? `<img src="${i.image}" class="w-full h-full object-cover">` : `<div class="w-full h-full flex items-center justify-center text-[8px]">No img</div>`}
+                                </div>
+                                <div class="flex-1 flex justify-between text-xs font-medium">
+                                    <span class="text-slate-500">${i.qty}x ${i.name}</span>
+                                    <span class="text-slate-800 font-bold">$${(i.price * i.qty).toFixed(2)}</span>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                    <div class="flex justify-between items-center pt-4 border-t border-slate-100"><span class="text-xs font-black text-slate-400 uppercase">Total Venta</span><span class="text-xl font-black text-slate-900">$${t.total.toFixed(2)}</span></div>
                     <button onclick="deleteTicket('${t.id}')" class="w-full text-[10px] text-slate-400 font-bold py-2.5 hover:text-rose-500 rounded-xl transition-all">BORRAR REGISTRO</button>
                 </div>
             `).sort((a,b) => b.timestamp - a.timestamp).join('');
@@ -333,9 +399,14 @@
                     const price = item.qty >= 3 ? (item.wholesale || item.price) : item.price;
                     total += (price * item.qty);
                     return `<div class="bg-slate-50 p-4 rounded-2xl border border-slate-200">
-                        <div class="flex justify-between font-bold text-xs text-slate-900"><span>${item.name}</span><span>$${(price * item.qty).toFixed(2)}</span></div>
-                        <div class="flex justify-between items-center mt-3">
-                            <span class="text-[9px] text-slate-400 font-black">$${price} c/u</span>
+                        <div class="flex gap-3 items-center mb-2">
+                             <img src="${item.image || ''}" class="w-10 h-10 rounded-lg object-cover bg-white">
+                             <div class="flex-1">
+                                <div class="flex justify-between font-bold text-xs text-slate-900"><span>${item.name}</span><span>$${(price * item.qty).toFixed(2)}</span></div>
+                                <span class="text-[9px] text-slate-400 font-black">$${price} c/u</span>
+                             </div>
+                        </div>
+                        <div class="flex justify-end items-center mt-3">
                             <div class="flex items-center gap-3">
                                 <button onclick="updateQty(${idx}, -1)" class="w-7 h-7 bg-white rounded-lg border border-slate-200 flex items-center justify-center">-</button>
                                 <span class="text-xs font-bold text-slate-800">${item.qty}</span>
@@ -368,11 +439,33 @@
             const items = cart.map(item => {
                 const price = item.qty >= 3 ? (item.wholesale || item.price) : item.price;
                 total += (price * item.qty);
-                return { name: item.name, qty: item.qty, price: price };
+                return { name: item.name, qty: item.qty, price: price, image: item.image };
             });
             try {
                 await addDoc(collection(db, "tickets"), { customerName: name, customerPhone: phone, items, total, date: new Date().toLocaleString(), timestamp: Date.now() });
-                window.open('', '_blank').document.write(`<html><body style="font-family:sans-serif; padding:20px;"><h2>Ticket ZAIS CYA</h2><p>Cliente: ${name}</p><hr>${items.map(i => `<p>${i.qty}x ${i.name} - $${(i.price*i.qty).toFixed(2)}</p>`).join('')}<h3>TOTAL: $${total.toFixed(2)}</h3></body></html>`);
+                const ticketWindow = window.open('', '_blank');
+                ticketWindow.document.write(`
+                    <html>
+                    <body style="font-family:sans-serif; padding:20px; color:#333;">
+                        <h2 style="border-bottom:2px solid #333; padding-bottom:10px;">Ticket de Venta - ZAIS CYA</h2>
+                        <p><strong>Cliente:</strong> ${name}</p>
+                        <p><strong>Teléfono:</strong> ${phone}</p>
+                        <hr>
+                        ${items.map(i => `
+                            <div style="display:flex; align-items:center; margin-bottom:15px; border-bottom:1px solid #eee; padding-bottom:10px;">
+                                <img src="${i.image}" style="width:50px; height:50px; object-cover:cover; border-radius:5px; margin-right:15px;">
+                                <div style="flex:1;">
+                                    <p style="margin:0; font-weight:bold;">${i.qty}x ${i.name}</p>
+                                    <p style="margin:0; font-size:0.8em; color:#666;">P.U: $${i.price.toFixed(2)}</p>
+                                </div>
+                                <p style="font-weight:bold;">$${(i.price*i.qty).toFixed(2)}</p>
+                            </div>
+                        `).join('')}
+                        <h3 style="text-align:right; margin-top:20px;">TOTAL A PAGAR: $${total.toFixed(2)}</h3>
+                        <p style="text-align:center; font-size:0.8em; color:#999; margin-top:40px;">Gracias por su compra</p>
+                    </body>
+                    </html>
+                `);
                 cart = []; updateCartUI(); toggleCart(); showToast("🎟️ Ticket generado");
             } catch (err) { showToast("Error."); }
         };
@@ -391,6 +484,8 @@
             document.getElementById('p-cat').value = p.category;
             document.getElementById('p-price').value = p.price;
             document.getElementById('p-wholesale').value = p.wholesale || p.price;
+            document.getElementById('p-price-bs').value = p.priceBs || 0;
+            document.getElementById('p-wholesale-bs').value = p.wholesaleBs || 0;
             document.getElementById('p-stock').value = p.stock;
             document.getElementById('product-modal').classList.remove('hidden');
         };
