@@ -16,11 +16,12 @@
 </head>
 <body class="bg-[#f1f5f9] text-slate-800">
 
-    <nav class="bg-white shadow-sm sticky top-0 z-50 border-b border-slate-200">
+    <!-- Navbar con fondo gris oscuro suave para resaltar el logo -->
+    <nav class="bg-slate-100 shadow-sm sticky top-0 z-50 border-b border-slate-200">
         <div class="max-w-7xl mx-auto px-4 h-16 flex justify-between items-center">
             <div class="flex items-center gap-3">
-                <!-- Nuevo Logo Actualizado -->
-                <div class="h-12 w-12 rounded-full overflow-hidden border border-slate-100 shadow-sm">
+                <!-- Contenedor del Logo ajustado -->
+                <div class="h-12 w-12 rounded-full overflow-hidden bg-white shadow-sm border border-slate-200">
                     <img src="https://api.allorigins.win/raw?url=https://raw.githubusercontent.com/distribuidora-zais/assets/main/logo.jpg" 
                          onerror="this.src='https://ui-avatars.com/api/?name=ZAIS+CYA&background=f1f5f9&color=888'"
                          alt="Logo Distribuidora ZAIS CYA" 
@@ -28,13 +29,13 @@
                 </div>
                 <div class="flex flex-col leading-tight">
                     <span class="text-lg font-bold text-slate-900 tracking-tight">Distribuidora ZAIS CYA</span>
-                    <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Tienda Oficial</span>
+                    <span class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Tienda Oficial</span>
                 </div>
             </div>
             <div class="flex items-center gap-4">
-                <button onclick="switchTab('store')" class="text-sm font-semibold text-slate-600 hover:text-slate-900">Tienda</button>
-                <button onclick="checkAdminAuth()" class="text-sm font-semibold border-l pl-4 border-slate-200 text-slate-600 hover:text-slate-900">Admin</button>
-                <button onclick="toggleCart()" class="relative p-2 bg-slate-100 rounded-full hover:bg-slate-200 transition-colors">
+                <button onclick="switchTab('store')" class="text-sm font-bold text-slate-600 hover:text-slate-900">Tienda</button>
+                <button onclick="checkAdminAuth()" class="text-sm font-bold border-l pl-4 border-slate-300 text-slate-600 hover:text-slate-900">Admin</button>
+                <button onclick="toggleCart()" class="relative p-2 bg-white rounded-full hover:bg-slate-200 border border-slate-200 transition-colors shadow-sm">
                     <i data-lucide="shopping-cart" class="w-5 h-5 text-slate-700"></i>
                     <span id="cart-count" class="absolute -top-1 -right-1 bg-slate-800 text-white text-[10px] font-bold rounded-full h-4 w-4 flex items-center justify-center hidden">0</span>
                 </button>
@@ -107,18 +108,17 @@
         </section>
     </main>
 
+    <!-- Modales -->
     <div id="product-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-[70] flex items-center justify-center p-4 hidden">
         <div class="bg-white rounded-3xl w-full max-w-md p-8 shadow-2xl overflow-y-auto max-h-[90vh]">
             <h2 id="modal-title" class="text-xl font-bold mb-6 text-slate-900">Gestión de Prenda</h2>
             <form id="product-form" onsubmit="handleProductSubmit(event)" class="space-y-4">
                 <input type="hidden" id="edit-id">
-                
                 <div>
                     <label class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Foto de la prenda</label>
                     <input type="file" id="p-image-file" accept="image/*" class="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:ring-2 focus:ring-slate-300 text-xs">
                     <input type="hidden" id="p-image-base64">
                 </div>
-
                 <div>
                     <label class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Nombre de la prenda</label>
                     <input type="text" id="p-name" required class="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:ring-2 focus:ring-slate-300">
@@ -179,7 +179,7 @@
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
         import { getFirestore, collection, doc, addDoc, updateDoc, deleteDoc, onSnapshot, serverTimestamp, query, orderBy } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
-        const firebaseConfig = {
+       const firebaseConfig = {
             apiKey: "AIzaSyDIp95fqGFn2mgJ_031a1Y_JfeKECKZTOk",
             authDomain: "potabilizadora-65aeb.firebaseapp.com",
             databaseURL: "https://potabilizadora-65aeb-default-rtdb.firebaseio.com",
@@ -189,19 +189,10 @@
             appId: "1:503467709475:web:dcad5aa24d0bf9d23acd96",
             measurementId: "G-E3TE034RV5"
             };
-
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
         
-        const CATEGORIES = [
-            "Todas", "piyamas de overzide 3 piezas", "3 piezas", "2 piezas", 
-            "piyamas acanalada de 2 piezas y 3 piezas", "piyamas de set", 
-            "piyamas de botones 3 piezas y 2 piezas", "piyama juveniles 3 pieza", 
-            "piyama de dama", "piyama de camiseta y shor", "piyama sexi de 3 pieza y 2 piezas", 
-            "bata de seda con Cardigan", "blusones overzide", "suéter de dama y caballero", 
-            "Shorts de jean", "Pijamas de botones de caballeros", "Conjuntos deportivos", "Conjuntos trans"
-        ];
-        
+        const CATEGORIES = ["Todas", "piyamas de overzide 3 piezas", "3 piezas", "2 piezas", "piyamas acanalada de 2 piezas y 3 piezas", "piyamas de set", "piyamas de botones 3 piezas y 2 piezas", "piyama juveniles 3 pieza", "piyama de dama", "piyama de camiseta y shor", "piyama sexi de 3 pieza y 2 piezas", "bata de seda con Cardigan", "blusones overzide", "suéter de dama y caballero", "Shorts de jean", "Pijamas de botones de caballeros", "Conjuntos deportivos", "Conjuntos trans"];
         const ADMIN_PASSWORD = "admin123";
         let products = [], cart = [], tickets = [], currentFilter = 'Todas', isAdminLoggedIn = false;
 
@@ -224,9 +215,7 @@
             const file = e.target.files[0];
             if (file) {
                 const reader = new FileReader();
-                reader.onload = function(event) {
-                    document.getElementById('p-image-base64').value = event.target.result;
-                };
+                reader.onload = (event) => document.getElementById('p-image-base64').value = event.target.result;
                 reader.readAsDataURL(file);
             }
         });
@@ -234,23 +223,16 @@
         window.togglePasswordVisibility = () => {
             const passInput = document.getElementById('admin-pass');
             const icon = document.getElementById('password-toggle-icon');
-            if (passInput.type === 'password') {
-                passInput.type = 'text';
-                icon.setAttribute('data-lucide', 'eye-off');
-            } else {
-                passInput.type = 'password';
-                icon.setAttribute('data-lucide', 'eye');
-            }
+            passInput.type = (passInput.type === 'password') ? 'text' : 'password';
+            icon.setAttribute('data-lucide', passInput.type === 'text' ? 'eye-off' : 'eye');
             lucide.createIcons();
         };
 
         window.handleProductSubmit = async (e) => {
             e.preventDefault();
             const id = document.getElementById('edit-id').value;
-            const base64Image = document.getElementById('p-image-base64').value;
-            
             const data = {
-                image: base64Image,
+                image: document.getElementById('p-image-base64').value,
                 name: document.getElementById('p-name').value,
                 category: document.getElementById('p-cat').value,
                 price: parseFloat(document.getElementById('p-price').value),
@@ -263,23 +245,21 @@
                 else await addDoc(collection(db, "productos"), data);
                 closeProductModal();
                 showToast("✓ Inventario actualizado");
-            } catch (err) { showToast("Error al guardar en la nube."); }
+            } catch (err) { showToast("Error al guardar."); }
         };
 
         window.renderStore = () => {
             const grid = document.getElementById('product-grid');
             const filtered = currentFilter === 'Todas' ? products : products.filter(p => p.category === currentFilter);
-            
             if(filtered.length === 0) {
                 grid.innerHTML = `<div class="col-span-full py-20 text-center text-slate-400 italic">No hay productos en esta categoría</div>`;
                 return;
             }
-
             grid.innerHTML = filtered.map(p => `
                 <div class="bg-white rounded-2xl border border-slate-200 p-4 shadow-sm hover:shadow-md transition-all group">
-                    <div class="h-44 bg-slate-50 rounded-xl mb-4 flex items-center justify-center text-slate-300 relative group-hover:bg-slate-100 transition-colors overflow-hidden">
+                    <div class="h-44 bg-slate-50 rounded-xl mb-4 flex items-center justify-center text-slate-300 relative overflow-hidden">
                         ${p.image ? `<img src="${p.image}" class="w-full h-full object-cover">` : `<i data-lucide="shirt" class="w-14 h-14"></i>`}
-                        <span class="absolute top-2 right-2 text-[9px] font-bold px-2 py-1 bg-white/90 backdrop-blur-sm border border-slate-200 rounded-full ${p.stock > 0 ? 'text-slate-600' : 'text-rose-400'}">STOCK: ${p.stock}</span>
+                        <span class="absolute top-2 right-2 text-[9px] font-bold px-2 py-1 bg-white/90 border border-slate-200 rounded-full ${p.stock > 0 ? 'text-slate-600' : 'text-rose-400'}">STOCK: ${p.stock}</span>
                     </div>
                     <h3 class="font-bold text-sm h-10 line-clamp-2 text-slate-800">${p.name}</h3>
                     <div class="mt-3 space-y-1.5">
@@ -304,24 +284,12 @@
             const tbody = document.getElementById('admin-product-list');
             tbody.innerHTML = products.map(p => `
                 <tr class="text-sm hover:bg-slate-50 transition-colors">
-                    <td class="px-6 py-4">
-                        <div class="w-10 h-10 bg-slate-100 rounded-lg overflow-hidden flex items-center justify-center">
-                            ${p.image ? `<img src="${p.image}" class="w-full h-full object-cover">` : `<i data-lucide="image" class="w-4 h-4 text-slate-300"></i>`}
-                        </div>
-                    </td>
+                    <td class="px-6 py-4"><div class="w-10 h-10 bg-slate-100 rounded-lg overflow-hidden flex items-center justify-center">${p.image ? `<img src="${p.image}" class="w-full h-full object-cover">` : `<i data-lucide="image" class="w-4 h-4 text-slate-300"></i>`}</div></td>
                     <td class="px-6 py-4 font-bold text-slate-700">${p.name}</td>
-                    <td class="px-6 py-4 text-slate-500 text-xs uppercase tracking-tight font-medium">${p.category}</td>
-                    <td class="px-6 py-4">
-                        <div class="flex flex-col gap-1">
-                            <span class="text-[10px] text-slate-400 font-bold uppercase">Detal: $${p.price}</span>
-                            <span class="text-[10px] text-slate-900 font-black uppercase">Mayor: $${p.wholesale}</span>
-                        </div>
-                    </td>
+                    <td class="px-6 py-4 text-slate-500 text-xs uppercase font-medium">${p.category}</td>
+                    <td class="px-6 py-4"><div class="flex flex-col gap-1"><span class="text-[10px] text-slate-400 font-bold">Detal: $${p.price}</span><span class="text-[10px] text-slate-900 font-black">Mayor: $${p.wholesale}</span></div></td>
                     <td class="px-6 py-4 font-bold text-slate-600">${p.stock}</td>
-                    <td class="px-6 py-4 text-right">
-                        <button onclick="editProduct('${p.id}')" class="text-slate-900 font-bold text-xs mr-4 hover:underline">Editar</button>
-                        <button onclick="deleteProduct('${p.id}')" class="text-rose-400 font-bold text-xs hover:text-rose-600">Eliminar</button>
-                    </td>
+                    <td class="px-6 py-4 text-right"><button onclick="editProduct('${p.id}')" class="text-slate-900 font-bold text-xs mr-4 hover:underline">Editar</button><button onclick="deleteProduct('${p.id}')" class="text-rose-400 font-bold text-xs hover:text-rose-600">Eliminar</button></td>
                 </tr>
             `).join('');
             lucide.createIcons();
@@ -329,33 +297,16 @@
 
         window.renderAdminTickets = () => {
             const container = document.getElementById('tickets-list');
-            if(tickets.length === 0) {
-                container.innerHTML = `<div class="col-span-full py-20 text-center text-slate-400 italic">Historial de ventas vacío</div>`;
-                return;
-            }
+            if(tickets.length === 0) { container.innerHTML = `<div class="col-span-full py-20 text-center text-slate-400 italic">Historial de ventas vacío</div>`; return; }
             container.innerHTML = tickets.map(t => `
-                <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm space-y-4 hover:border-slate-400 transition-all">
+                <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm space-y-4">
                     <div class="flex justify-between items-start border-b border-slate-100 pb-3">
-                        <div>
-                            <p class="text-[9px] text-slate-400 font-black uppercase tracking-widest">Cliente</p>
-                            <h3 class="font-bold text-slate-900 text-base">${t.customerName}</h3>
-                            <p class="text-xs text-slate-500 font-medium">${t.customerPhone}</p>
-                        </div>
+                        <div><p class="text-[9px] text-slate-400 font-black uppercase">Cliente</p><h3 class="font-bold text-slate-900 text-base">${t.customerName}</h3><p class="text-xs text-slate-500">${t.customerPhone}</p></div>
                         <span class="text-[9px] bg-slate-100 px-2 py-1 rounded text-slate-400 font-bold">${t.date}</span>
                     </div>
-                    <div class="space-y-2">
-                        ${t.items.map(i => `
-                            <div class="flex justify-between text-xs font-medium">
-                                <span class="text-slate-500">${i.qty}x ${i.name}</span>
-                                <span class="text-slate-800 font-bold">$${(i.price * i.qty).toFixed(2)}</span>
-                            </div>
-                        `).join('')}
-                    </div>
-                    <div class="flex justify-between items-center pt-4 border-t border-slate-100">
-                        <span class="text-xs font-black text-slate-400 uppercase tracking-widest">Monto Total</span>
-                        <span class="text-xl font-black text-slate-900 tracking-tight">$${t.total.toFixed(2)}</span>
-                    </div>
-                    <button onclick="deleteTicket('${t.id}')" class="w-full text-[10px] text-slate-400 font-bold py-2.5 hover:text-rose-500 hover:bg-rose-50 rounded-xl transition-all">BORRAR REGISTRO</button>
+                    <div class="space-y-2">${t.items.map(i => `<div class="flex justify-between text-xs font-medium"><span class="text-slate-500">${i.qty}x ${i.name}</span><span class="text-slate-800 font-bold">$${(i.price * i.qty).toFixed(2)}</span></div>`).join('')}</div>
+                    <div class="flex justify-between items-center pt-4 border-t border-slate-100"><span class="text-xs font-black text-slate-400 uppercase">Total</span><span class="text-xl font-black text-slate-900">$${t.total.toFixed(2)}</span></div>
+                    <button onclick="deleteTicket('${t.id}')" class="w-full text-[10px] text-slate-400 font-bold py-2.5 hover:text-rose-500 rounded-xl transition-all">BORRAR REGISTRO</button>
                 </div>
             `).sort((a,b) => b.timestamp - a.timestamp).join('');
         };
@@ -365,32 +316,29 @@
             const inCart = cart.find(x => x.id === id);
             if (inCart) {
                 if(inCart.qty < p.stock) inCart.qty++;
-                else return showToast("Stock máximo alcanzado");
+                else return showToast("Stock máximo");
             } else cart.push({ ...p, qty: 1 });
             updateCartUI();
-            showToast("✓ Agregado al carrito");
+            showToast("✓ Agregado");
         };
 
         function updateCartUI() {
             let total = 0;
             const container = document.getElementById('cart-items');
             if(cart.length === 0) {
-                container.innerHTML = `<div class="flex flex-col items-center justify-center py-20 opacity-30"><i data-lucide="shopping-cart" class="w-12 h-12 mb-2"></i><p class="text-sm font-bold uppercase tracking-widest">Vacío</p></div>`;
+                container.innerHTML = `<div class="flex flex-col items-center justify-center py-20 opacity-30"><i data-lucide="shopping-cart" class="w-12 h-12 mb-2"></i><p class="text-sm font-bold">Vacío</p></div>`;
             } else {
                 container.innerHTML = cart.map((item, idx) => {
-                    const isWholesale = item.qty >= 3;
-                    const price = isWholesale ? (item.wholesale || item.price) : item.price;
-                    const subtotal = price * item.qty;
-                    total += subtotal;
-                    return `
-                    <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200">
-                        <div class="flex justify-between font-bold text-xs mb-1 text-slate-900"><span>${item.name}</span><span>$${subtotal.toFixed(2)}</span></div>
+                    const price = item.qty >= 3 ? (item.wholesale || item.price) : item.price;
+                    total += (price * item.qty);
+                    return `<div class="bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                        <div class="flex justify-between font-bold text-xs text-slate-900"><span>${item.name}</span><span>$${(price * item.qty).toFixed(2)}</span></div>
                         <div class="flex justify-between items-center mt-3">
-                            <span class="text-[9px] text-slate-400 font-black uppercase tracking-tight">$${price} c/u ${isWholesale ? '(Mayor)' : '(Detal)'}</span>
+                            <span class="text-[9px] text-slate-400 font-black">$${price} c/u</span>
                             <div class="flex items-center gap-3">
-                                <button onclick="updateQty(${idx}, -1)" class="w-7 h-7 bg-white rounded-lg border border-slate-200 flex items-center justify-center hover:bg-slate-100 transition-colors">-</button>
+                                <button onclick="updateQty(${idx}, -1)" class="w-7 h-7 bg-white rounded-lg border border-slate-200 flex items-center justify-center">-</button>
                                 <span class="text-xs font-bold text-slate-800">${item.qty}</span>
-                                <button onclick="updateQty(${idx}, 1)" class="w-7 h-7 bg-white rounded-lg border border-slate-200 flex items-center justify-center hover:bg-slate-100 transition-colors">+</button>
+                                <button onclick="updateQty(${idx}, 1)" class="w-7 h-7 bg-white rounded-lg border border-slate-200 flex items-center justify-center">+</button>
                             </div>
                         </div>
                     </div>`;
@@ -414,41 +362,26 @@
         window.generateDigitalTicket = async () => {
             const name = document.getElementById('cust-name').value.trim();
             const phone = document.getElementById('cust-phone').value.trim();
-            if(!name || !phone) return showToast("Faltan datos de contacto");
-            if(cart.length === 0) return showToast("El carrito está vacío");
+            if(!name || !phone || cart.length === 0) return showToast("Faltan datos");
             let total = 0;
-            const itemsToSave = cart.map(item => {
-                const isWholesale = item.qty >= 3;
-                const price = isWholesale ? (item.wholesale || item.price) : item.price;
+            const items = cart.map(item => {
+                const price = item.qty >= 3 ? (item.wholesale || item.price) : item.price;
                 total += (price * item.qty);
                 return { name: item.name, qty: item.qty, price: price };
             });
-            const ticketData = {
-                customerName: name, customerPhone: phone, items: itemsToSave,
-                total: total, date: new Date().toLocaleString(), timestamp: Date.now()
-            };
             try {
-                await addDoc(collection(db, "tickets"), ticketData);
-                const ticketWindow = window.open('', '_blank');
-                ticketWindow.document.write(`<html><head><title>Ticket - Distribuidora ZAIS CYA</title><style>body { font-family: sans-serif; padding: 40px; color: #1e293b; background: #f8fafc; } .ticket { max-width: 400px; margin: auto; background: white; border: 1px solid #e2e8f0; padding: 40px; border-radius: 24px; } .logo { font-size: 24px; font-weight: 800; color: #0f172a; text-transform: uppercase; text-align:center; margin-bottom:30px; } .total { margin-top: 30px; padding-top: 20px; border-top: 3px solid #0f172a; font-size: 20px; font-weight: 900; display: flex; justify-content: space-between; }</style></head><body><div class="ticket"><div class="logo">ZAIS CYA</div><div><strong>Cliente:</strong> ${name}<br><strong>Tel:</strong> ${phone}</div><hr style="margin:20px 0; border:none; border-top:1px dashed #eee;">${itemsToSave.map(i => `<div style="display:flex; justify-content: space-between; font-size:13px; margin-bottom:5px;"><span>${i.qty}x ${i.name}</span><span style="font-weight:700">$${(i.price*i.qty).toFixed(2)}</span></div>`).join('')}<div class="total"><span>TOTAL</span><span>$${total.toFixed(2)}</span></div></div></body></html>`);
-                ticketWindow.document.close();
+                await addDoc(collection(db, "tickets"), { customerName: name, customerPhone: phone, items, total, date: new Date().toLocaleString(), timestamp: Date.now() });
+                window.open('', '_blank').document.write(`<html><body style="font-family:sans-serif; padding:20px;"><h2>Ticket ZAIS CYA</h2><p>Cliente: ${name}</p><hr>${items.map(i => `<p>${i.qty}x ${i.name} - $${(i.price*i.qty).toFixed(2)}</p>`).join('')}<h3>TOTAL: $${total.toFixed(2)}</h3></body></html>`);
                 cart = []; updateCartUI(); toggleCart(); showToast("🎟️ Ticket generado");
-            } catch (err) { showToast("Error al procesar la venta."); }
+            } catch (err) { showToast("Error."); }
         };
 
-        window.switchAdminView = (view) => {
-            if(view === 'tickets') {
-                document.getElementById('admin-panel-section').classList.add('hidden');
-                document.getElementById('admin-tickets-section').classList.remove('hidden');
-            } else {
-                document.getElementById('admin-tickets-section').classList.add('hidden');
-                document.getElementById('admin-panel-section').classList.remove('hidden');
-            }
-            lucide.createIcons();
+        window.switchAdminView = (v) => { 
+            document.getElementById('admin-panel-section').classList.toggle('hidden', v === 'tickets');
+            document.getElementById('admin-tickets-section').classList.toggle('hidden', v === 'inventory');
+            lucide.createIcons(); 
         };
-
-        window.deleteTicket = async (id) => { if(confirm("¿Eliminar registro?")) await deleteDoc(doc(db, "tickets", id)); };
-        
+        window.deleteTicket = async (id) => { if(confirm("¿Borrar?")) await deleteDoc(doc(db, "tickets", id)); };
         window.editProduct = (id) => {
             const p = products.find(x => x.id === id);
             document.getElementById('edit-id').value = p.id;
@@ -458,50 +391,22 @@
             document.getElementById('p-price').value = p.price;
             document.getElementById('p-wholesale').value = p.wholesale || p.price;
             document.getElementById('p-stock').value = p.stock;
-            document.getElementById('modal-title').innerText = "Editar Prenda";
             document.getElementById('product-modal').classList.remove('hidden');
         };
-
-        window.deleteProduct = async (id) => { if (confirm("¿Eliminar producto?")) await deleteDoc(doc(db, "productos", id)); };
-        window.openProductModal = () => { document.getElementById('product-form').reset(); document.getElementById('edit-id').value = ""; document.getElementById('p-image-base64').value = ""; document.getElementById('modal-title').innerText = "Nueva Prenda"; document.getElementById('product-modal').classList.remove('hidden'); };
+        window.deleteProduct = async (id) => { if (confirm("¿Eliminar?")) await deleteDoc(doc(db, "productos", id)); };
+        window.openProductModal = () => { document.getElementById('product-form').reset(); document.getElementById('edit-id').value = ""; document.getElementById('p-image-base64').value = ""; document.getElementById('product-modal').classList.remove('hidden'); };
         window.closeProductModal = () => document.getElementById('product-modal').classList.add('hidden');
         window.toggleCart = () => document.getElementById('cart-modal').classList.toggle('hidden');
-        window.switchTab = (tab) => { 
-            ['store-section', 'admin-login-section', 'admin-panel-section', 'admin-tickets-section'].forEach(id => document.getElementById(id).classList.add('hidden')); 
-            document.getElementById(tab + '-section').classList.remove('hidden'); 
-            lucide.createIcons(); 
-        };
-        window.loginAdmin = () => { if (document.getElementById('admin-pass').value === ADMIN_PASSWORD) { isAdminLoggedIn = true; switchTab('admin-panel'); } else showToast("Acceso denegado."); };
+        window.switchTab = (tab) => { ['store-section', 'admin-login-section', 'admin-panel-section', 'admin-tickets-section'].forEach(id => document.getElementById(id).classList.add('hidden')); document.getElementById(tab + '-section').classList.remove('hidden'); lucide.createIcons(); };
+        window.loginAdmin = () => { if (document.getElementById('admin-pass').value === ADMIN_PASSWORD) { isAdminLoggedIn = true; switchTab('admin-panel'); } else showToast("Error."); };
         window.logoutAdmin = () => { isAdminLoggedIn = false; switchTab('store'); };
         window.checkAdminAuth = () => isAdminLoggedIn ? switchTab('admin-panel') : switchTab('admin-login');
         window.filterCat = (c) => { currentFilter = c; renderCats(); renderStore(); };
+        function renderCats() { document.getElementById('category-bar').innerHTML = CATEGORIES.map(c => `<button onclick="filterCat('${c}')" class="px-4 py-2 rounded-xl text-[10px] font-black uppercase border tracking-widest ${currentFilter === c ? 'bg-slate-800 text-white' : 'bg-white text-slate-400'}">${c}</button>`).join(''); }
+        function populateCatSelect() { document.getElementById('p-cat').innerHTML = CATEGORIES.filter(c => c !== 'Todas').map(c => `<option value="${c}">${c}</option>`).join(''); }
+        function showToast(msg) { const t = document.getElementById('toast'); t.innerText = msg; t.classList.remove('hidden'); setTimeout(() => t.classList.add('hidden'), 2000); }
 
-        function renderCats() {
-            document.getElementById('category-bar').innerHTML = CATEGORIES.map(c => `
-                <button onclick="filterCat('${c}')" class="px-4 py-2 rounded-xl text-[10px] font-black whitespace-nowrap border uppercase tracking-widest transition-all ${currentFilter === c ? 'bg-slate-800 text-white border-slate-800' : 'bg-white text-slate-400 border-slate-200 hover:border-slate-400'}">
-                    ${c}
-                </button>
-            `).join('');
-        }
-
-        function populateCatSelect() {
-            document.getElementById('p-cat').innerHTML = CATEGORIES.filter(c => c !== 'Todas').map(c => `<option value="${c}">${c}</option>`).join('');
-        }
-
-        function showToast(msg) {
-            const t = document.getElementById('toast'); t.innerText = msg; t.classList.remove('hidden');
-            setTimeout(() => t.classList.add('hidden'), 2000);
-        }
-
-        window.onload = () => {
-            renderCats();
-            populateCatSelect();
-            if (firebaseConfig.apiKey) {
-                listenProducts();
-                listenTickets();
-            }
-            lucide.createIcons();
-        };
+        window.onload = () => { renderCats(); populateCatSelect(); if (firebaseConfig.apiKey) { listenProducts(); listenTickets(); } lucide.createIcons(); };
     </script>
 </body>
 </html>
